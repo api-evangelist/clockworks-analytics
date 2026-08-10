@@ -1,0 +1,316 @@
+generated: '2026-08-09'
+method: searched
+source: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+docs:
+- https://cw.clockworksanalytics.com/APIDocumentation.aspx
+- https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/4577951781/Key+Performance+Indicators+API+Developer+Guide
+note: >-
+  Derived from the relationship links and nested collection routes Clockworks publishes in
+  its own REST API documentation, plus the dataset catalog in the KPI developer guide. No
+  OpenAPI exists for this provider, so no $ref graph was available; every entity and edge
+  below is stated in the provider's documentation.
+identifiers:
+  CID: client organization id
+  BID: building id
+  EID: equipment id
+  TaskID: globally unique task id
+  OrganizationTaskID: task id unique within a client organization
+entities:
+- name: Clients
+  container: core-base
+  description: A subscribing customer organization. An API subscriber may have many peer
+    clients.
+  key: id
+  attributes:
+  - ClientName
+  - ClientAddress
+  - ClientCity
+  - ClientStateName
+  - ClientZip
+  - ClientPhone
+  - IsActive
+  - ReportTheme
+  - OrganizationTheme
+  - CountryName
+  - ParentOrganization
+- name: Buildings
+  container: core-base
+  description: A logical structural unit, either a single physical structure or several
+    grouped by criteria.
+  attributes:
+  - BuildingName
+  - BuildingTypeID
+  - CID
+  - Address
+  - BuildingClassID
+  - BuildingClassName
+  - BuildingClassDescription
+  - BuildingOwnership
+- name: BuildingTypes
+  container: core-base
+- name: BuildingVariables
+  container: core-base
+  description: Static metadata about buildings such as utility rates and operating
+    schedules.
+- name: Equipment
+  container: core-base
+  description: A piece of building equipment analysed by Clockworks.
+  attributes:
+  - BID
+  - BuildingName
+  - EquipmentName
+  - EquipmentLocation
+  - SerialNumber
+  - EquipmentTypeID
+  - IsActive
+  - IsVisible
+  - ConfigurationStatusID
+  - ConfigurationStatusName
+  - ManufacturerModelID
+  - CMMSReferenceID
+  - CMMSLink
+- name: EquipmentClasses
+  container: core-base
+- name: EquipmentTypes
+  container: core-base
+- name: EquipmentVariables
+  container: core-base
+  description: Static metadata about equipment such as rated fan power, rated flow and
+    sequence details.
+- name: Points
+  container: core-base
+  description: Raw data points collected from the Building Management System.
+- name: PointClasses
+  container: core-base
+- name: PointTypes
+  container: core-base
+- name: EngineeringUnits
+  container: core-base
+- name: DataSources
+  container: core-base
+  description: The Clockworks Connect software gateway polling raw data from the BMS.
+- name: BMSInfo
+  container: core-base
+  description: Building Management System details for a client.
+- name: DataTransferServices
+  container: core-base
+- name: Analyses
+  container: core-base
+- name: TaskRecords
+  container: core-base
+- name: TaskStatuses
+  container: core-base
+- name: Users
+  container: core-base
+- name: Diagnostics
+  container: core-diag
+  description: Combined output of all diagnostic results produced by a single analysis on a
+    piece of equipment, with avoidable cost and energy/comfort/maintenance priorities.
+  attributes:
+  - ID
+  - AEID
+  - AID
+  - EID
+  - BID
+  - EquipmentClassId
+  - EquipmentTypeId
+  - StartDate
+  - AnalysisName
+  - EquipmentName
+  - EnergyPriority
+  - ComfortPriority
+  - MaintenancePriority
+  - TotalPriority
+  - CostSavings
+  - Notes
+  - NotesSummary
+  - DiagnosticHyperlink
+- name: RawData
+  container: core-base
+  description: Typically 5-minute interval data collected from the BMS.
+- name: VData
+  container: core-base
+  description: Calculated points produced by Clockworks on an hourly or daily timestamp.
+- name: VPoints
+  container: core-base
+- name: Tasks
+  container: workorders
+  description: User-generated tasks created from diagnostic results and synchronized to CMMS
+    work orders.
+  attributes:
+  - TaskID
+  - OrganizationTaskID
+  - BuildingID
+  - BuildingName
+  - OrganizationID
+  - Summary
+  - Description
+  - Recommendations
+  - Actions
+  - AnnualSavings
+  - StatusName
+  - StatusID
+  - ReporterUID
+  - AssigneeUID
+  - Labels
+  - DateCreated
+  - DateCompleted
+  - DateModified
+  - HasGenerateWorkOrder
+  - WorkOrderID
+  - Equipment
+  - SubTasks
+  cmms_fields:
+  - cmmsSiteId
+  - CMMSSiteID
+  - CMMSLocationID
+  - CMMSAssetID
+relationships:
+- from: Clients
+  to: Buildings
+  kind: has_many
+  via: /clients/{id}/buildings
+- from: Clients
+  to: BuildingTypes
+  kind: has_many
+  via: /clients/{id}/buildingTypes
+- from: Clients
+  to: BMSInfo
+  kind: has_many
+  via: /clients/{id}/bmsinfo
+- from: Clients
+  to: Analyses
+  kind: has_many
+  via: /clients/{id}/analyses
+- from: Clients
+  to: DataSources
+  kind: has_many
+  via: /clients/{id}/datasources
+- from: Clients
+  to: DataTransferServices
+  kind: has_many
+  via: /clients/{id}/datatransferservices
+- from: Clients
+  to: Clients
+  kind: has_many
+  via: /clients/{id}/clientsProvidedFor
+- from: Clients
+  to: Users
+  kind: has_many
+  via: /clients/{id}/users
+- from: Buildings
+  to: Clients
+  kind: belongs_to
+  via: CID
+- from: Buildings
+  to: Equipment
+  kind: has_many
+  via: /buildings/{id}/equipment
+- from: Buildings
+  to: EquipmentClasses
+  kind: has_many
+  via: /buildings/{id}/equipmentclasses
+- from: Buildings
+  to: EquipmentTypes
+  kind: has_many
+  via: /buildings/{id}/equipmenttypes
+- from: Buildings
+  to: TaskRecords
+  kind: has_many
+  via: /buildings/{id}/taskrecords
+- from: Buildings
+  to: BuildingVariables
+  kind: has_many
+  via: /buildings/{id}/buildingbuildingvariables
+- from: Buildings
+  to: Points
+  kind: has_many
+  via: /buildings/{id}/points
+- from: Equipment
+  to: Buildings
+  kind: belongs_to
+  via: BID
+- from: Equipment
+  to: EquipmentTypes
+  kind: belongs_to
+  via: EquipmentTypeID
+- from: Equipment
+  to: Points
+  kind: has_many
+  via: /equipment/{id}/points
+- from: Equipment
+  to: VPoints
+  kind: has_many
+  via: /equipment/{id}/vpoints
+- from: Equipment
+  to: Analyses
+  kind: has_many
+  via: /equipment/{id}/analyses
+- from: Equipment
+  to: TaskRecords
+  kind: has_many
+  via: /equipment/{id}/taskrecords
+- from: Equipment
+  to: EquipmentVariables
+  kind: has_many
+  via: /equipment/{id}/equipmentequipmentvariables
+- from: EquipmentClasses
+  to: EquipmentTypes
+  kind: has_many
+  via: /equipmentclasses/{id}/equipmenttypes
+- from: EquipmentTypes
+  to: PointTypes
+  kind: has_many
+  via: /equipmenttypes/{id}/pointtypes
+- from: PointClasses
+  to: PointTypes
+  kind: has_many
+  via: /pointclasses/{id}/pointtypes
+- from: DataSources
+  to: Points
+  kind: has_many
+  via: /datasources/{id}/points
+- from: Diagnostics
+  to: Equipment
+  kind: belongs_to
+  via: EID
+- from: Diagnostics
+  to: Buildings
+  kind: belongs_to
+  via: BID
+- from: Tasks
+  to: Buildings
+  kind: belongs_to
+  via: BuildingID
+- from: Tasks
+  to: Equipment
+  kind: has_many
+  via: Equipment[] array on the Task V2 response
+- from: Tasks
+  to: Diagnostics
+  kind: has_many
+  via: SubTasks[] each optionally referencing one diagnostic result
+kpi_datasets:
+  endpoint: https://rest.buildingsapi.net/core-kpis/AggregatedData
+  query_language: Kusto Query Language (KQL)
+  datasets:
+  - AggregatedRawData
+  - BuildingGroups
+  - Buildings
+  - BuildingVariables
+  - DataSources
+  - DataSourceHealth
+  - Deployments
+  - DiagnosticResults
+  - DiagnosticResultsVData
+  - Diagnostics
+  - Equipment
+  - EquipmentRelationships
+  - EquipmentVariables
+  - Organizations
+  - Points
+  - RawData
+  - ResultGroups
+  - Tasks
+  - Users
+  - Vdata

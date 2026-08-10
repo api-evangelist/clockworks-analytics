@@ -1,0 +1,56 @@
+generated: '2026-08-09'
+method: searched
+source: https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/5742297089/CMMS+Integration+Developer+Guide+version+2
+environments:
+- name: production
+  base_hosts:
+  - https://rest.buildingsapi.net
+  containers:
+  - https://rest.buildingsapi.net/core-base
+  - https://rest.buildingsapi.net/core-diag
+  - https://rest.buildingsapi.net/core-kpis
+  - https://rest.buildingsapi.net/workorders
+  portal: https://portal.clockworksanalytics.com/
+- name: qa
+  base_hosts:
+  - https://qarest.buildingsapi.net
+  containers:
+  - https://qarest.buildingsapi.net/core-base
+  - https://qarest.buildingsapi.net/workorders
+  portal: https://qaportal.clockworkslabs.com/
+  documented_in: CMMS Integration Developer Guide (version 2) — the published pre-request
+    auth script targets https://qarest.buildingsapi.net/workorders/auth/token
+separation:
+  mechanism: separate hostnames per environment (rest vs qarest)
+  key_prefixes: none published
+  test_mode_flag: false
+interactive_console:
+  url: https://clockworks.developer.azure-api.net/
+  type: Azure API Management developer portal try-it console
+  access: gated
+  note: >-
+    The Azure APIM developer portal is publicly reachable but returns an empty API and
+    product list to anonymous callers; the interactive console requires a portal sign-in
+    and a provisioned subscription.
+credentials:
+  self_service: false
+  how_to_get: >-
+    The URL endpoint and subscription key are provided by Clockworks Analytics once the API
+    subscriber is registered. Work Orders access additionally requires a clientId and
+    clientSecret issued by Clockworks.
+  request_channel: https://kgsbuildings.atlassian.net/servicedesk/customer/portals
+test_values:
+  published: false
+  note: >-
+    Clockworks publishes no magic test identifiers, fixture accounts or seeded sample
+    tenants. Sample IDs appearing in the documentation (client 1, building 1235, equipment
+    19715, task 185144) are illustrative response examples, not callable test fixtures, and
+    are deliberately not recorded here as test values.
+x-evidence:
+  fetched: '2026-08-09'
+  probes:
+  - url: https://rest.buildingsapi.net/core-base/clients
+    http_status: 401
+  - url: https://clockworks.developer.azure-api.net/developer/apis?api-version=2022-04-01-preview
+    http_status: 200
+    body: '{"value":[],"nextLink":null}'

@@ -1,0 +1,23 @@
+generated: '2026-08-09'
+method: probed
+probe: true
+url: https://trust.clockworksanalytics.com/
+platform: Vanta
+certifications: []
+certifications_note: >-
+  The trust center is live and titled "Clockworks Analytics Trust Center", but the report
+  body is rendered client-side by the Vanta trust-report bundle; the served HTML contains no
+  certification names, and the Vanta API returns 401 to anonymous callers. Certifications are
+  therefore recorded as unverified rather than guessed, and no Compliance pointer is claimed.
+evidence:
+- source: https://trust.clockworksanalytics.com/
+  http_status: 200
+  content_location: https://assets.vanta.com/static/vite/index-trust-report.vite.d2be3283a0a045fbe3ffa1f80b211c8d12e47e2a.html
+  title: Clockworks Analytics Trust Center
+- source: https://api.vanta.com/v1/trust-report/clockworksanalytics
+  http_status: 401
+x-evidence:
+  fetched: '2026-08-09'
+  url: https://trust.clockworksanalytics.com/
+  http_status: 200
+  content_type: text/html

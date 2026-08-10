@@ -1,18 +1,93 @@
 aid: clockworks-analytics
 name: Clockworks Analytics
-description: 'Clockworks Analytics is a company surfaced via the API Evangelist harvest backlog (source:
-  secondary-market) and added to the network as a stub for full-pipeline profiling.'
+description: 'Clockworks Analytics is a Boston-area building-analytics company whose
+  cloud platform performs automated fault detection and diagnostics (FDD) on HVAC and
+  building systems. It ingests interval data from Building Management Systems through
+  the Clockworks Connect gateway, runs a curated library of root-cause diagnostics, and
+  quantifies each performance issue by avoidable energy cost plus energy, comfort and
+  maintenance priority on a 0-10 scale. Its public REST API is delivered through Azure
+  API Management on rest.buildingsapi.net as four containers — core-base (clients,
+  buildings, equipment, points, users), core-diag (diagnostic records), core-kpis
+  (KQL-driven aggregated datasets) and workorders (Tasks / CMMS work-order sync) — and
+  is documented publicly at cw.clockworksanalytics.com plus a public Confluence developer
+  guide set for CMMS and KPI integration.'
+image: https://clockworksanalytics.com/wp-content/themes/Clockworks/images/clockworks-logo.svg
 url: https://raw.githubusercontent.com/api-evangelist/clockworks-analytics/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-09'
 modified: '2026-08-09'
 tags:
 - Company
-apis: []
+- Building Analytics
+- Fault Detection and Diagnostics
+- HVAC
+- Energy Management
+- Facilities Management
+- Smart Buildings
+- CMMS Integration
+- Analytics
+- Internet of Things
+apis:
+- name: Clockworks Base API
+  description: The Base container of the Clockworks REST API. Serves static asset information
+    — clients, buildings, building types and variables, equipment, equipment classes /
+    types / variables, points, point classes and types, engineering units, task records
+    and users — as JSON:API-shaped documents. Authenticated with an Azure API Management
+    subscription key in the Ocp-Apim-Subscription-Key header.
+  humanURL: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+  baseURL: https://rest.buildingsapi.net/core-base
+  tags:
+  - Buildings
+  - Equipment
+  - Assets
+  properties:
+  - type: Documentation
+    url: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+  - type: APIReference
+    url: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+- name: Clockworks Diagnostics API
+  description: The core-diag container. POST /diagnostics returns the diagnostic records
+    produced by the Clockworks analysis engine for a set of client IDs, building IDs, a
+    date range and an analysis interval, including avoidable cost, energy / comfort /
+    maintenance priorities and the narrative fault notes.
+  humanURL: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+  baseURL: https://rest.buildingsapi.net/core-diag
+  tags:
+  - Diagnostics
+  - Faults
+- name: Clockworks Key Performance Indicators API
+  description: The core-kpis container. POST /AggregatedData accepts a Kusto Query
+    Language (KQL) expression plus a dataset list and returns server-side aggregated
+    results across the Clockworks datasets (Diagnostics, DiagnosticResults, RawData,
+    AggregatedRawData, Equipment, Buildings, Points, Tasks, Users and more) instead of
+    thousands of individual records.
+  humanURL: https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/4577951781/Key+Performance+Indicators+API+Developer+Guide
+  baseURL: https://rest.buildingsapi.net/core-kpis
+  tags:
+  - KPIs
+  - Analytics
+  - Aggregation
+  properties:
+  - type: Documentation
+    url: https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/4577951781/Key+Performance+Indicators+API+Developer+Guide
+- name: Clockworks Work Orders API
+  description: The workorders container. Carries the Task records Clockworks users create
+    from diagnostic results and synchronizes them to work orders in a CMMS. Uses a bearer
+    token obtained from POST /workorders/auth/token with a clientId and clientSecret,
+    valid for 3599 seconds, rather than the subscription key used by the other containers.
+  humanURL: https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/5742297089/CMMS+Integration+Developer+Guide+version+2
+  baseURL: https://rest.buildingsapi.net/workorders
+  tags:
+  - Work Orders
+  - Tasks
+  - CMMS
+  properties:
+  - type: Documentation
+    url: https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/5742297089/CMMS+Integration+Developer+Guide+version+2
+  - type: GettingStarted
+    url: https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/5742297089/CMMS+Integration+Developer+Guide+version+2
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +95,69 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/clockworks-analytics_stock/
+  url: https://clockworksanalytics.com/
+- type: DeveloperPortal
+  url: https://clockworks.developer.azure-api.net/
+- type: Documentation
+  url: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+- type: APIReference
+  url: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+- type: GettingStarted
+  url: https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/5742297089/CMMS+Integration+Developer+Guide+version+2
+- type: Support
+  url: https://kgsbuildings.atlassian.net/servicedesk/customer/portals
+- type: Blog
+  url: https://clockworksanalytics.com/blog/
+- type: Login
+  url: https://portal.clockworksanalytics.com/login
+- type: TermsOfService
+  url: https://clockworksanalytics.com/website-terms-of-use/
+- type: PrivacyPolicy
+  url: https://clockworksanalytics.com/website-terms-of-use/
+- type: StatusPage
+  url: https://status.clockworksanalytics.com/
+- type: ChangeLog
+  url: https://clockworksanalytics.com/product-updates/
+- type: TrustCenter
+  url: https://trust.clockworksanalytics.com/
+- type: TrustCenter
+  url: security/clockworks-analytics-trust-center.yml
+- type: ChangeLog
+  url: changelog/clockworks-analytics-changelog.yml
+- type: Authentication
+  url: authentication/clockworks-analytics-authentication.yml
+- type: Conventions
+  url: conventions/clockworks-analytics-conventions.yml
+- type: Lifecycle
+  url: lifecycle/clockworks-analytics-lifecycle.yml
+- type: Conformance
+  url: conformance/clockworks-analytics-conformance.yml
+- type: DataModel
+  url: data-model/clockworks-analytics-data-model.yml
+- type: Sandbox
+  url: sandbox/clockworks-analytics-sandbox.yml
+- type: DomainSecurity
+  url: security/clockworks-analytics-domain-security.yml
+- type: LLMsTxt
+  url: llms/clockworks-analytics-llms.txt
+x-enrichment:
+  date: '2026-08-09'
+  status: enriched
+  artifacts_added: 11
+  pass: local-v1
+x-coverage:
+  state: covered
+  reason: null
+  detail: >-
+    The public REST reference at cw.clockworksanalytics.com is fully readable and four Azure
+    API Management containers on rest.buildingsapi.net were confirmed live, but Clockworks
+    publishes no OpenAPI, AsyncAPI, GraphQL SDL or Postman collection anywhere — the APIM
+    developer portal returns an empty API list to anonymous callers.
+  evidence:
+  - url: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+    status: 200
+  - url: https://rest.buildingsapi.net/core-base/clients
+    status: 401
+  - url: https://clockworks.developer.azure-api.net/developer/apis?api-version=2022-04-01-preview
+    status: 200
+  checked: '2026-08-09'

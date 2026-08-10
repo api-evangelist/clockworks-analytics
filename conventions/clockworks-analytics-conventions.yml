@@ -1,0 +1,137 @@
+generated: '2026-08-09'
+method: searched
+source: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+docs:
+- https://cw.clockworksanalytics.com/APIDocumentation.aspx
+- https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/4577951781/Key+Performance+Indicators+API+Developer+Guide
+style: REST over HTTP with JSON:API-shaped documents
+media_types:
+  request: application/json
+  response: application/vnd.api+json
+authentication:
+  see: authentication/clockworks-analytics-authentication.yml
+  summary: >-
+    APIM subscription key header on core-base / core-diag / core-kpis; bearer token on
+    workorders.
+http_verbs:
+- verb: GET
+  usage: simple retrievals
+- verb: POST
+  usage: more complex retrievals (filtered / query-body reads such as /diagnostics and
+    /AggregatedData) and record creation on some containers
+- verb: PUT
+  usage: creating entities / records
+- verb: PATCH
+  usage: updating entities / records
+- verb: OPTIONS
+  usage: preflight only
+envelope:
+  shape: json-api-like
+  top_level_members:
+  - metadata
+  - data
+  - links
+  data_member_fields:
+  - type
+  - id
+  - attributes
+  - relationships
+  - links
+  metadata_fields:
+  - ApiVersion
+  note: >-
+    Each data element carries a resource type name, an integer id, an attributes object,
+    a relationships object of self/related link pairs, and a self link.
+pagination:
+  style: page-number
+  parameter: page[number]
+  page_size: 1000
+  page_size_configurable: false
+  response_fields:
+  - links.self
+  - links.first
+  - links.next
+  - links.last
+  caching: >-
+    The initial request is cached and the emitted paging links carry a cache key (the
+    "spko" query parameter) so subsequent pages return the same result set in the same
+    order rather than re-querying live data.
+  example: https://{URL}/core-base/equipment?page[number]=1&spko=data:sids:REDACTED
+sparse_fieldsets:
+  supported: true
+  parameter: fields[<ResourceType>]
+  form: comma-separated list of field names, chainable across related resources
+  example: https://{URL}/core-base/buildings/13?fields[Buildings]=BuildingName,Address
+filtering:
+  style: mixed
+  query_parameters:
+  - classID
+  - typeID
+  - enabledFor
+  request_body_filters:
+    applies_to:
+    - POST /core-diag/diagnostics
+    - POST /core-kpis/AggregatedData
+    - POST /workorders/Tasks/search
+    keys:
+    - CID
+    - BID
+    - EID
+    - StartDate
+    - EndDate
+    - AnalysisInterval
+    - taskIds
+    - OrganizationIDs
+query_language:
+  name: Kusto Query Language (KQL)
+  applies_to: https://rest.buildingsapi.net/core-kpis/AggregatedData
+  contract: >-
+    The KQL string must begin with the dataset name suffixed with "Dataset" and the same
+    dataset must be listed in the Datasets array; some datasets additionally require a date
+    range and analysis interval.
+  example: DiagnosticsDataset | summarize CostSum = sum(ConvertedAvoidableCost) by EquipmentID,
+    EquipmentName
+versioning:
+  scheme: header
+  headers:
+  - ApiVersion
+  - ApiDocVersion
+  current_documented: '1.0'
+  workorders_auth_apiversion: '3.0'
+  path_versioning: false
+  note: >-
+    The API version number is carried in the HTTP header to maintain backward
+    compatibility; the docs state the header will be extended with other API-wide settings
+    such as optionally including relationships in JSON responses.
+idempotency:
+  supported: false
+  note: >-
+    No idempotency key header, request-replay contract or safe-retry guidance is published
+    in any Clockworks developer document. Recorded as absent, not assumed.
+request_tracing:
+  request_id_header: null
+  note: No request-id / correlation-id header is documented.
+rate_limiting:
+  documented: false
+  note: >-
+    No rate-limit policy or rate-limit response headers are documented publicly. The API is
+    fronted by Azure API Management, which supports quota and rate-limit policies, but no
+    published limits were found.
+errors:
+  catalog_published: false
+  note: >-
+    No error-code reference or problem-details format is published; the only observed error
+    is the Azure API Management 401 "Access denied due to missing subscription key" JSON
+    envelope on an unauthenticated call.
+identifiers:
+  CID: unique id for a client organization
+  BID: unique id for a building
+  EID: unique id for a piece of equipment
+  TaskID: globally unique task id across the Clockworks system
+  OrganizationTaskID: task id unique only within a client organization (was ClientTaskID in
+    Task V1)
+cross_links:
+  authentication: authentication/clockworks-analytics-authentication.yml
+  lifecycle: lifecycle/clockworks-analytics-lifecycle.yml
+  data_model: data-model/clockworks-analytics-data-model.yml
+  conformance: conformance/clockworks-analytics-conformance.yml

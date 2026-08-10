@@ -1,0 +1,47 @@
+generated: '2026-08-09'
+method: probed
+note: >-
+  No /.well-known/ document was found on any Clockworks host. Recorded as an honest zero.
+  IMPORTANT — portal.clockworksanalytics.com answers HTTP 200 with the same 797-byte HTML
+  single-page-app shell for EVERY path, including a control path that cannot exist, so its
+  200s are soft 404s and confer no discovery surface. No WellKnown or SecurityTxt pointer is
+  wired in apis.yml because nothing was actually found.
+hosts:
+- host: https://clockworksanalytics.com
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /llms.txt, status: 404}
+- host: https://rest.buildingsapi.net
+  gateway: Azure API Management
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+- host: https://clockworks.developer.azure-api.net
+  documents:
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/security.txt, status: 404}
+- host: https://portal.clockworksanalytics.com
+  soft_404: true
+  documents:
+  - {path: /.well-known/security.txt, status: 200, content_type: text/html, verdict: soft-404}
+  - {path: /.well-known/agent-card.json, status: 200, content_type: text/html, verdict: soft-404}
+  - {path: /.well-known/agent.json, status: 200, content_type: text/html, verdict: soft-404}
+  - {path: /.well-known/openid-configuration, status: 200, content_type: text/html, verdict: soft-404}
+  - {path: /llms.txt, status: 200, content_type: text/html, verdict: soft-404}
+  - {path: /.well-known/definitely-not-a-real-path-12345, status: 200, content_type: text/html,
+     verdict: control-path, note: 'identical 797-byte body proves the 200s above are a catch-all'}
+- host: https://cw.clockworksanalytics.com
+  documents:
+  - {path: /.well-known/security.txt, status: 302}
+  - {path: /.well-known/agent-card.json, status: 302}
+  - {path: /llms.txt, status: 302}

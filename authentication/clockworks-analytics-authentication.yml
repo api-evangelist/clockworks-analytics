@@ -1,0 +1,75 @@
+generated: '2026-08-09'
+method: searched
+source: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+docs:
+- https://cw.clockworksanalytics.com/APIDocumentation.aspx
+- https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/5742297089/CMMS+Integration+Developer+Guide+version+2
+note: >-
+  Clockworks publishes no OpenAPI, so this profile is read from the provider's own public
+  API documentation rather than derived from securitySchemes. The API is fronted by Azure
+  API Management and splits authentication by container: the read/asset containers use an
+  APIM subscription key, the work-order container uses a bearer token minted from a
+  clientId/clientSecret pair.
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+  oauth2_flows: []
+  containers_with_distinct_credentials: 2
+schemes:
+- name: ApimSubscriptionKey
+  type: apiKey
+  in: header
+  parameter_name: Ocp-Apim-Subscription-Key
+  applies_to:
+  - https://rest.buildingsapi.net/core-base
+  - https://rest.buildingsapi.net/core-diag
+  - https://rest.buildingsapi.net/core-kpis
+  issuance: >-
+    URL endpoint and subscription key are provisioned by Clockworks Analytics once the API
+    subscriber is registered; keys are scoped to the buildings and equipment the associated
+    user account may access.
+  sources:
+  - https://cw.clockworksanalytics.com/APIDocumentation.aspx
+  x-evidence:
+    fetched: '2026-08-09'
+    url: https://rest.buildingsapi.net/core-base/clients
+    http_status: 401
+    www_authenticate: AzureApiManagementKey realm="https://rest.buildingsapi.net/core-base",name="Ocp-Apim-Subscription-Key",type="header"
+- name: WorkOrdersBearerToken
+  type: http
+  scheme: bearer
+  applies_to:
+  - https://rest.buildingsapi.net/workorders
+  token_endpoint: https://rest.buildingsapi.net/workorders/auth/token
+  token_endpoint_method: POST
+  token_request_body:
+  - clientId
+  - clientSecret
+  token_response_field: data.accessToken
+  token_lifetime_seconds: 3599
+  header: 'Authorization: {{bearerToken}}'
+  sources:
+  - https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/5742297089/CMMS+Integration+Developer+Guide+version+2
+required_headers:
+- name: Accept
+  value: application/vnd.api+json
+- name: Content-Type
+  value: application/json
+- name: Ocp-Apim-Subscription-Key
+  value: '{Subscription Key}'
+  applies_to: base/diag/kpi containers
+- name: ApiVersion
+  value: '{API Version}'
+- name: ApiDocVersion
+  value: '{API Doc Version}'
+- name: APIVersion
+  value: '3.0'
+  applies_to: workorders auth/token request
+scopes_published: false
+scopes_note: >-
+  No OAuth 2.0 authorization server, no scope reference and no OpenID Connect discovery
+  document were found on any Clockworks host; access is scoped by the provisioned user
+  account behind the subscription key, not by declared scopes.

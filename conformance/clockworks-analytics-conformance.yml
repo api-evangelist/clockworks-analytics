@@ -1,0 +1,73 @@
+generated: '2026-08-09'
+method: searched
+source: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+note: >-
+  Clockworks publishes no OpenAPI, so every assertion below is read from the provider's own
+  public API documentation and from live probes of rest.buildingsapi.net. Nothing here is
+  inferred from a spec we authored.
+standards:
+- id: rest
+  conforms: true
+  evidence: >-
+    Documentation describes a library of REST web services over HTTP with resource URIs,
+    JSON responses and documented verb semantics (GET simple retrievals, POST complex
+    retrievals, PUT create, PATCH update, OPTIONS preflight).
+- id: json-api
+  conforms: partial
+  evidence: >-
+    Responses use the application/vnd.api+json media type and a JSON:API-shaped document
+    (data[] with type/id/attributes/relationships/links, top-level links with
+    self/first/next/last, sparse fieldsets via fields[Type], pagination via page[number]).
+    Deviations from JSON:API 1.0: a non-standard top-level "metadata" member instead of
+    "meta", integer rather than string resource ids, page[number] without page[size], and
+    no documented errors[] object.
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No OAuth 2.0 authorization server, token grant type or scope reference is published.
+    The workorders container mints a bearer token from a clientId/clientSecret pair at
+    POST /workorders/auth/token, which resembles but is not documented as an OAuth 2.0
+    client-credentials grant.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returns 404 on rest.buildingsapi.net.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    No application/problem+json responses are documented. The observed unauthenticated
+    error is the Azure API Management envelope {"statusCode":401,"message":"..."}.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on clockworksanalytics.com and
+    rest.buildingsapi.net.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header support is documented.
+- id: pagination
+  conforms: true
+  evidence: >-
+    Page-number pagination at a fixed 1,000 elements per page with self/first/next/last
+    links and a server-side cache key so a paged traversal returns a stable snapshot.
+- id: idempotency
+  conforms: false
+  evidence: No idempotency key or safe-retry contract is documented.
+- id: openapi
+  conforms: false
+  evidence: >-
+    No OpenAPI or Swagger document was reachable at any probed location — the Azure API
+    Management gateway root, /openapi.json, /swagger.json, /swagger/v1/swagger.json,
+    /api-docs and /docs on rest.buildingsapi.net all return the APIM 404 envelope, and the
+    Azure APIM developer portal returns an empty API list to anonymous callers.
+- id: asyncapi
+  conforms: false
+  evidence: No event, streaming or webhook surface is documented; there is nothing to
+    describe with AsyncAPI.
+compliance_program:
+  published: true
+  trust_center: https://trust.clockworksanalytics.com/
+  certifications_verified: []
+  note: >-
+    A Vanta-hosted trust center is live and returns 200 with the title "Clockworks Analytics
+    Trust Center", but its contents are rendered client-side and no named certification
+    could be read from the served HTML. No Compliance pointer is claimed until a specific
+    certification is verifiable.

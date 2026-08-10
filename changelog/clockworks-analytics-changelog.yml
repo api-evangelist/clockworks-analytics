@@ -1,0 +1,110 @@
+generated: '2026-08-09'
+method: searched
+source: https://clockworksanalytics.com/product-updates/
+url: https://clockworksanalytics.com/product-updates/
+scheme: dated-release-notes
+cadence: roughly monthly
+version_numbers_published: false
+current_version: null
+note: >-
+  Clockworks publishes monthly product release notes on its marketing site rather than a
+  versioned API changelog. Entries describe platform and application changes; API-surface
+  changes are announced separately as migration guides in the public Confluence space (see
+  lifecycle/clockworks-analytics-lifecycle.yml migrations[]). Recent window only.
+entries:
+- date: '2026-06'
+  title: 'More Access, Clearer Diagnostics'
+  url: https://clockworksanalytics.com/june-29-2026/
+  breaking: false
+  highlights:
+  - Data is now available to every user, no preview access required
+  - New Passed Checks list in the Diagnostic Report
+  - Equipment Labels column available on the Diagnostics table
+- date: '2026-06'
+  title: 'Earlier June release'
+  url: https://clockworksanalytics.com/june-04-2026/
+  breaking: false
+  highlights: []
+- date: '2026-05'
+  title: 'Diagnostics by Equipment & AI Summary Upgrades'
+  breaking: false
+  highlights:
+  - All diagnostics are presented by equipment
+  - Air Handler Economizer, Coils, Fan and Energy combined into a single output per unit
+  - AI summary now covers all results across the full filtered date range
+  - Diagnostic reports display cost and priority for every result
+- date: '2026-04-23'
+  title: 'Faster Loading, Upgrades to the Data Feature, Cross-filtering of Diagnostics and
+    Tasks'
+  url: https://clockworksanalytics.com/product-release-april-23-2026/
+  breaking: false
+  highlights:
+  - App loads roughly 4x faster for users with access to many organizations
+  - Cross-filter tables from summary widgets
+  - Aggregated-across-time views, task creation from a chart, save a chart against a task
+- date: '2026-03'
+  title: 'Onboarding Design, Connections, and Action'
+  url: https://clockworksanalytics.com/onboarding-design-updates/
+  breaking: false
+  highlights:
+  - Onboarding Summary tab adds a data connectivity summary and timeline chart
+  - Bulk create buildings
+  - Associate file gateways to edge servers
+  - Early Diagnostics widget for high Energy, Comfort or Maintenance priority equipment
+- date: '2026-02'
+  title: 'Onboarding Details & Connections'
+  url: https://clockworksanalytics.com/onboarding-updates-and-gateway-connections/
+  breaking: false
+  highlights:
+  - Updates to Deployment Summaries and Deployment Tickets
+  - Create new buildings under Assets
+  - New Connections page for viewing and editing Edge Gateways
+- date: '2026-02'
+  title: 'Improved Onboarding Visibility & Early Diagnostics'
+  url: https://clockworksanalytics.com/deployment-visibility-early-diagnostics/
+  breaking: false
+  highlights:
+  - Redesigned deployment experience with customer-facing tickets
+  - Go-Live includes early diagnostic results
+- date: '2025-12'
+  title: 'Task and Equipment Labels Bulk Editing & Faster Asset Editing'
+  url: https://clockworksanalytics.com/task-equipment-labels-bulk-editing/
+  breaking: false
+  highlights:
+  - Bulk edit task and equipment labels
+  - Faster asset editing across building, equipment and points pages
+- date: '2025-10'
+  title: 'Quick Reference Diagnostics & Bulk Point Editing'
+  url: https://clockworksanalytics.com/quick-reference-diagnostics-bulk-point-editing/
+  breaking: false
+  highlights:
+  - Icon showing when diagnostics are linked to specific tasks
+  - Bulk point editing
+- date: '2025-09'
+  title: 'Redesigned Diagnostic Reports, Tasks Summary Widgets, and Improved Deployment
+    Workflows'
+  url: https://clockworksanalytics.com/redesigned-diagnostic-report/
+  breaking: false
+  highlights:
+  - AI summary populates task descriptions and recommended actions
+  - Tasks summary widgets
+  - Better ticket tracking
+- date: '2025-08'
+  title: 'Diagnostics Summary Widgets and Bulk Tasks Creation'
+  url: https://clockworksanalytics.com/diagnostics-summary-widgets/
+  breaking: false
+  highlights:
+  - Real-time counts of equipment with faults over time
+  - Visibility into critical-labeled equipment with current faults
+  - Create tasks across multiple pieces of equipment at once
+- date: '2025-07'
+  title: 'Enhanced Diagnostic Results and Task Management'
+  url: https://clockworksanalytics.com/enhanced-diagnostic-results/
+  breaking: false
+  highlights:
+  - Diagnostics reports broken down for more targeted workflows
+  - Detailed breakdowns across four critical areas of each result
+x-evidence:
+  fetched: '2026-08-09'
+  url: https://clockworksanalytics.com/product-updates/
+  http_status: 200

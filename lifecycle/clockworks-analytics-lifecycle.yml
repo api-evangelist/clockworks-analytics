@@ -1,0 +1,53 @@
+generated: '2026-08-09'
+method: searched
+source: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+versioning:
+  scheme: header
+  headers:
+  - ApiVersion
+  - ApiDocVersion
+  current: '1.0'
+  docs: https://cw.clockworksanalytics.com/APIDocumentation.aspx
+  note: >-
+    The API version number is included as part of the HTTP header to maintain backward
+    compatibility. There is no version in the URL path; the container name (core-base,
+    core-diag, core-kpis, workorders) segments the surface instead.
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: unknown
+  note: >-
+    No deprecation policy, retirement schedule or RFC 8594 Sunset/Deprecation header support
+    is published. Clockworks does publish per-change migration guidance when an endpoint
+    generation is replaced — see migrations[] — but that is a migration notice, not a stated
+    policy, so no Deprecation pointer is claimed for this provider.
+migrations:
+- name: Task V2 API Endpoint Migration
+  url: https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/5390794755/Task+V2+API+Endpoint+Migration
+  summary: >-
+    Task V1 to Task V2 response migration. AnalysisID and AEID are no longer returned;
+    equipment moves from a single EquipmentID/Equipment Name pair to a nested array; fields
+    renamed ClientTaskID to OrganizationTaskID, AssignedUID to AssigneeUID, AssignedName to
+    AssigneeName; subtasks and comma-separated Labels added.
+  breaking: true
+sla:
+  url: null
+  uptime_target: null
+  note: No public SLA or uptime commitment was found.
+status_page: https://status.clockworksanalytics.com/
+status_page_evidence:
+  fetched: '2026-08-09'
+  url: https://status.clockworksanalytics.com/
+  http_status: 200
+  title: Clockworks Analytics Service status
+  features:
+  - 90-day uptime calendar
+  - overall uptime for last 24 hours / 7 / 30 / 90 days
+  - status update history
+  - email subscription to updates
+changelog:
+  url: https://clockworksanalytics.com/product-updates/
+  artifact: changelog/clockworks-analytics-changelog.yml
+deprecated_operations: []
+deprecated_operations_note: >-
+  No OpenAPI is published, so operation-level deprecation flags cannot be derived.
