@@ -81,6 +81,10 @@ apis:
   baseURL: https://rest.buildingsapi.net/workorders
   tags:
   - Work Orders
+  - Task
+  - CMMS
+  tags_raw:
+  - Work Orders
   - Tasks
   - CMMS
   properties:
