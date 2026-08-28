@@ -11,6 +11,17 @@ description: 'Clockworks Analytics is a Boston-area building-analytics company w
   (KQL-driven aggregated datasets) and workorders (Tasks / CMMS work-order sync) — and
   is documented publicly at cw.clockworksanalytics.com plus a public Confluence developer
   guide set for CMMS and KPI integration.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://clockworksanalytics.com/wp-content/themes/Clockworks/images/clockworks-logo.svg
 url: https://raw.githubusercontent.com/api-evangelist/clockworks-analytics/refs/heads/main/apis.yml
 x-type: company
