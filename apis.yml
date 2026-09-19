@@ -54,6 +54,17 @@ tags:
 - Smart Buildings
 - CMMS Integration
 - Analytics
+- IoT
+tags_raw:
+- Company
+- Building Analytics
+- Fault Detection and Diagnostics
+- HVAC
+- Energy Management
+- Facilities Management
+- Smart Buildings
+- CMMS Integration
+- Analytics
 - Internet of Things
 apis:
 - name: Clockworks Base API
