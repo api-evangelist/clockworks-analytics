@@ -64,5 +64,98 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Clockworks Analytics is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/clockworks-analytics_stock/
+Clockworks Analytics is a Boston-area building-analytics company whose cloud platform performs automated fault detection and diagnostics (FDD) on HVAC and building systems. It ingests interval data from Building Management Systems through the Clockworks Connect gateway, runs a curated library of root-cause diagnostics, and quantifies each performance issue by avoidable energy cost plus energy, comfort and maintenance priority on a 0-10 scale. Its public REST API is delivered through Azure API Management on rest.buildingsapi.net as four containers — core-base (clients, buildings, equipment, points, users), core-diag (diagnostic records), core-kpis (KQL-driven aggregated datasets) and workorders (Tasks / CMMS work-order sync) — and is documented publicly at cw.clockworksanalytics.com plus a public Confluence developer guide set for CMMS and KPI integration.
+
+**Areas:** Company · Building Analytics · Fault Detection and Diagnostics · HVAC · Energy Management · Facilities Management · Smart Buildings · CMMS Integration · Analytics · IoT
+
+## Clockworks Analytics on APIs.io
+
+Everything profiled for Clockworks Analytics is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/clockworks-analytics/](https://apis.io/providers/clockworks-analytics/)** — or go straight to one of the APIs or properties below.
+
+### APIs (4)
+
+- [Clockworks Base API](https://apis.io/apis/clockworks-analytics/clockworks-base-api/) — The Base container of the Clockworks REST API. Serves static asset information — clients, buildings, building types and variables, equipment, equipment…
+- [Clockworks Diagnostics API](https://apis.io/apis/clockworks-analytics/clockworks-diagnostics-api/) — The core-diag container. POST /diagnostics returns the diagnostic records produced by the Clockworks analysis engine for a set of client IDs, building IDs,…
+- [Clockworks Key Performance Indicators API](https://apis.io/apis/clockworks-analytics/clockworks-key-performance-indicators-api/) — The core-kpis container. POST /AggregatedData accepts a Kusto Query Language (KQL) expression plus a dataset list and returns server-side aggregated results…
+- [Clockworks Work Orders API](https://apis.io/apis/clockworks-analytics/clockworks-work-orders-api/) — The workorders container. Carries the Task records Clockworks users create from diagnostic results and synchronizes them to work orders in a CMMS. Uses a…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Clockworks Analytics Authentication](https://apis.io/security/clockworks-analytics/clockworks-analytics-authentication/)
+- [Clockworks Analytics Domain Security](https://apis.io/security/clockworks-analytics/clockworks-analytics-domain-security/)
+- [Clockworks Analytics Trust Center](https://apis.io/security/clockworks-analytics/clockworks-analytics-trust-center/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://clockworksanalytics.com/)
+- [Documentation](https://cw.clockworksanalytics.com/APIDocumentation.aspx)
+- [Getting started](https://clockworksanalytics.atlassian.net/wiki/spaces/ClockworksAnalyticsUM/pages/5742297089/CMMS+Integration+Developer+Guide+version+2)
+- [API reference](https://cw.clockworksanalytics.com/APIDocumentation.aspx)
+- [Support](https://kgsbuildings.atlassian.net/servicedesk/customer/portals)
+- [Changelog](https://clockworksanalytics.com/product-updates/)
+- [Blog](https://clockworksanalytics.com/blog/)
+- [Trust centre](https://trust.clockworksanalytics.com/)
+- [Terms of service](https://clockworksanalytics.com/website-terms-of-use/)
+- [Privacy policy](https://clockworksanalytics.com/website-terms-of-use/)
+- [Status](https://status.clockworksanalytics.com/)
+
+## API Evangelist rating
+
+**Kin Score 35.1** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 31.6 |
+| Developer ergonomics | 64.3 |
+| Access clarity | 35.5 |
+
+**Agent readiness 2.5** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 24.6** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/clockworks-analytics/](https://apis.io/providers/clockworks-analytics/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Clockworks Analytics: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/clockworks-analytics/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
